@@ -1,0 +1,54 @@
+name: teitwebsite
+description: "Teit corporation - создаем IT продукты которые подчеркнут вас и вашу компанию."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  font_awesome_flutter: ^10.7.0
+  dotted_border: ^2.1.0
+  url_launcher: ^6.2.5
+  meta_seo: ^3.0.9
+  seo: ^0.0.6
+  flutter:
+    sdk: flutter
+
+
+
+dev_dependencies:
+  flutter_lints: ^3.0.1
+  flutter_launcher_icons: ^0.13.1
+  flutter_test:
+    sdk: flutter
+
+
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/images/teiticon.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: CompanyFont
+      fonts:
+        - asset: fonts/Radiotechnika.ttf
+    - family: TextFont
+      fonts:
+        - asset: fonts/Mont.ttf
+    - family: JustAnother
+      fonts:
+        - asset: fonts/Comic.ttf
