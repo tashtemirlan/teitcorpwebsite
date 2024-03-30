@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seo/seo.dart';
 import 'package:teitwebsite/website/websitePage.dart';
-import 'package:meta_seo/meta_seo.dart';
-import 'package:flutter/foundation.dart';
 
 class LogoStart extends StatefulWidget{
   const LogoStart({super.key});
@@ -47,14 +45,6 @@ class LogoStartState extends State<LogoStart>{
     Color colorCompany = const Color.fromRGBO(21, 126, 254, 1);
     double deltaWidth = width/1440;
     double deltaMobile = width/425;
-    if(kIsWeb) {
-      // Define MetaSEO object
-      MetaSEO meta = MetaSEO();
-      // add meta seo data for web app as you want
-      meta.author(author: 'Teit corp');
-      meta.description(description: 'Teit corporation - создаем IT продукты которые подчеркнут вас и вашу компанию.Разработка информационных продуктов различной сложности.');
-      meta.keywords(keywords: 'Teit Corporation, Teit, teit , teit corp, teit corporation, Teit Corp, разработка сайтов , разработка мобильных приложений , сайты , приложения');
-    }
     if(width>425){
       return SeoController(
           tree: WidgetTree(context: context),
