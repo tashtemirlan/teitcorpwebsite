@@ -2,8 +2,6 @@
 
 This project is built using **Flutter 3.24.2** and **Dart SDK 3.5.2**. Follow the instructions below to build and deploy the correct version of the website.
 
-![WebSiteQR](https://github.com/user-attachments/assets/9442542a-45fd-4cc4-bb95-b45efd32a5e3)
-
 ---
 
 ## 📋 Requirements
