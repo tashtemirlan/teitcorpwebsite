@@ -1285,10 +1285,9 @@ class WebsitePageState extends State<WebsitePage>{
                         alignment: Alignment.center,
                         child: Container(
                             width: 1128 * deltaWidth,
-                            height: 530 * deltaWidth,
                             color: Colors.transparent,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 SizedBox(
@@ -1304,55 +1303,175 @@ class WebsitePageState extends State<WebsitePage>{
                                       )
                                   ),)
                                 ),
-                                MouseRegion(
-                                  cursor:SystemMouseCursors.click,
-                                  child: GestureDetector(
-                                    onTap: (){
-                                      Uri uri = Uri.parse("https://zherdesh.ru/");
-                                      _launchURL(uri);
-                                    },
-                                    child: SizedBox(
-                                      height: 411 * deltaWidth,
-                                      width: 380 * deltaWidth,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          DottedBorder(
+                                SizedBox(height: 20 * deltaWidth,),
+                                Wrap(
+                                  spacing: 10 * deltaWidthMobile, // horizontal space between items
+                                  runSpacing: 10 * deltaWidthMobile, // vertical space between rows
+                                  alignment: WrapAlignment.center,
+                                  children: [
+
+                                    /// ZHERDESH.RU
+                                    MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Uri uri = Uri.parse("https://zherdesh.ru/");
+                                          _launchURL(uri);
+                                        },
+                                        child: SizedBox(
+                                          height: 411 * deltaWidth,
+                                          width: 380 * deltaWidth,
+                                          child: Center(
+                                            child: DottedBorder(
                                               borderType: BorderType.RRect,
                                               radius: Radius.circular(35 * deltaWidth),
                                               color: const Color.fromRGBO(77, 170, 232, 1),
                                               strokeWidth: 2 * deltaWidth,
-                                              dashPattern: [10 * deltaWidth , 2 * deltaWidth],
-                                              child:  SizedBox(
-                                                  width: 360 * deltaWidth,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 150 * deltaWidth,
-                                                        height: 150 * deltaWidth,
-                                                        child: Image.asset('assets/images/company1.png', filterQuality: FilterQuality.high),
+                                              dashPattern: [10 * deltaWidth, 2 * deltaWidth],
+                                              child: SizedBox(
+                                                width: 360 * deltaWidth,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 150 * deltaWidth,
+                                                      height: 150 * deltaWidth,
+                                                      child: Image.asset(
+                                                        'assets/images/company1.png',
+                                                        filterQuality: FilterQuality.high,
                                                       ),
-                                                      SizedBox(height: 15 * deltaWidth,),
-                                                      Seo.text(text: 'Zherdesh.ru', child: Text(
-                                                          'Zherdesh.ru', textAlign: TextAlign.center,
-                                                          style: TextStyle(
-                                                              fontFamily: 'TextFont',
-                                                              fontSize: 32.0*deltaWidth,
-                                                              fontWeight: FontWeight.w700,
-                                                              color: Colors.black
-                                                          )
-                                                      ),)
-                                                    ],
-                                                  )
-                                              )
+                                                    ),
+                                                    SizedBox(height: 15 * deltaWidth),
+                                                    Seo.text(
+                                                      text: 'Zherdesh.ru',
+                                                      child: Text(
+                                                        'Zherdesh.ru',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontFamily: 'TextFont',
+                                                          fontSize: 32.0 * deltaWidth,
+                                                          fontWeight: FontWeight.w700,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
-                                  ),
+
+                                    /// TERRA TORT
+                                    MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Uri uri = Uri.parse("https://apps.apple.com/mn/app/terra-tort/id6744176024");
+                                          _launchURL(uri);
+                                        },
+                                        child: SizedBox(
+                                          height: 411 * deltaWidth,
+                                          width: 380 * deltaWidth,
+                                          child: Center(
+                                            child: DottedBorder(
+                                              borderType: BorderType.RRect,
+                                              radius: Radius.circular(35 * deltaWidth),
+                                              color: const Color.fromRGBO(76, 0, 101, 1),
+                                              strokeWidth: 2 * deltaWidth,
+                                              dashPattern: [10 * deltaWidth, 2 * deltaWidth],
+                                              child: SizedBox(
+                                                width: 360 * deltaWidth,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 150 * deltaWidth,
+                                                      height: 150 * deltaWidth,
+                                                      child: Image.asset(
+                                                        'assets/images/company2.png',
+                                                        filterQuality: FilterQuality.high,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 15 * deltaWidth),
+                                                    Seo.text(
+                                                      text: 'Terra Tort',
+                                                      child: Text(
+                                                        'Terra Tort',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontFamily: 'TextFont',
+                                                          fontSize: 32.0 * deltaWidth,
+                                                          fontWeight: FontWeight.w700,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    /// TITAN SECURITY
+                                    MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Uri uri = Uri.parse("https://titan-security.kg/");
+                                          _launchURL(uri);
+                                        },
+                                        child: SizedBox(
+                                          height: 411 * deltaWidth,
+                                          width: 380 * deltaWidth,
+                                          child: Center(
+                                            child: DottedBorder(
+                                              borderType: BorderType.RRect,
+                                              radius: Radius.circular(35 * deltaWidth),
+                                              color: const Color(0xFF050A12),
+                                              strokeWidth: 2 * deltaWidth,
+                                              dashPattern: [10 * deltaWidth, 2 * deltaWidth],
+                                              child: SizedBox(
+                                                width: 360 * deltaWidth,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 150 * deltaWidth,
+                                                      height: 150 * deltaWidth,
+                                                      child: Image.asset(
+                                                        'assets/images/company3.png',
+                                                        filterQuality: FilterQuality.high,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 15 * deltaWidth),
+                                                    Seo.text(
+                                                      text: 'Titan Security',
+                                                      child: Text(
+                                                        'Titan Security',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontFamily: 'TextFont',
+                                                          fontSize: 32.0 * deltaWidth,
+                                                          fontWeight: FontWeight.w700,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 )
                               ],
                             )
@@ -2462,54 +2581,154 @@ class WebsitePageState extends State<WebsitePage>{
                                           )
                                       ),)
                                   ),
-                                  MouseRegion(
-                                    cursor:SystemMouseCursors.click,
-                                    child: GestureDetector(
-                                      onTap: (){
-                                        Uri uri = Uri.parse("https://zherdesh.ru/");
-                                        _launchURL(uri);
-                                      },
-                                      child: SizedBox(
-                                        height: 200 * deltaWidthMobile,
-                                        width: 144 * deltaWidthMobile,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            DottedBorder(
-                                                borderType: BorderType.RRect,
-                                                radius: Radius.circular(15 * deltaWidthMobile),
-                                                color: const Color.fromRGBO(77, 170, 232, 1),
-                                                strokeWidth: 2 * deltaWidthMobile,
-                                                dashPattern: [10 * deltaWidthMobile , 2 * deltaWidthMobile],
-                                                child:  SizedBox(
-                                                    width: 135 * deltaWidthMobile,
-                                                    child: Column(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 60 * deltaWidthMobile,
-                                                          height: 60 * deltaWidthMobile,
-                                                          child: Image.asset('assets/images/company1.png', filterQuality: FilterQuality.high),
-                                                        ),
-                                                        SizedBox(height: 15 * deltaWidthMobile,),
-                                                        Seo.text(text: 'Zherdesh.ru', child: Text(
-                                                            'Zherdesh.ru', textAlign: TextAlign.center,
-                                                            style: TextStyle(
-                                                                fontFamily: 'TextFont',
-                                                                fontSize: 18.0*deltaWidthMobile,
-                                                                fontWeight: FontWeight.w700,
-                                                                color: Colors.black
-                                                            )
-                                                        ),)
-                                                      ],
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        /// ZHERDESH.RU
+                                        MouseRegion(
+                                          cursor:SystemMouseCursors.click,
+                                          child: GestureDetector(
+                                            onTap: (){
+                                              Uri uri = Uri.parse("https://zherdesh.ru/");
+                                              _launchURL(uri);
+                                            },
+                                            child: SizedBox(
+                                              height: 200 * deltaWidthMobile,
+                                              width: 144 * deltaWidthMobile,
+                                              child: Center(
+                                                child: DottedBorder(
+                                                    borderType: BorderType.RRect,
+                                                    radius: Radius.circular(15 * deltaWidthMobile),
+                                                    color: const Color.fromRGBO(77, 170, 232, 1),
+                                                    strokeWidth: 2 * deltaWidthMobile,
+                                                    dashPattern: [10 * deltaWidthMobile , 2 * deltaWidthMobile],
+                                                    child:  SizedBox(
+                                                        width: 135 * deltaWidthMobile,
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 60 * deltaWidthMobile,
+                                                              height: 60 * deltaWidthMobile,
+                                                              child: Image.asset('assets/images/company1.png', filterQuality: FilterQuality.high),
+                                                            ),
+                                                            SizedBox(height: 15 * deltaWidthMobile,),
+                                                            Seo.text(text: 'Zherdesh.ru', child: Text(
+                                                                'Zherdesh.ru', textAlign: TextAlign.center,
+                                                                style: TextStyle(
+                                                                    fontFamily: 'TextFont',
+                                                                    fontSize: 18.0*deltaWidthMobile,
+                                                                    fontWeight: FontWeight.w700,
+                                                                    color: Colors.black
+                                                                )
+                                                            ),)
+                                                          ],
+                                                        )
                                                     )
-                                                )
+                                                ),
+                                              ),
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                        /// TERRA TORT
+                                        SizedBox(width: 10 * deltaWidthMobile,),
+                                        MouseRegion(
+                                          cursor:SystemMouseCursors.click,
+                                          child: GestureDetector(
+                                            onTap: (){
+                                              Uri uri = Uri.parse("https://apps.apple.com/mn/app/terra-tort/id6744176024");
+                                              _launchURL(uri);
+                                            },
+                                            child: SizedBox(
+                                              height: 200 * deltaWidthMobile,
+                                              width: 144 * deltaWidthMobile,
+                                              child: Center(
+                                                child: DottedBorder(
+                                                    borderType: BorderType.RRect,
+                                                    radius: Radius.circular(15 * deltaWidthMobile),
+                                                    color: const Color.fromRGBO(76, 0, 101, 1),
+                                                    strokeWidth: 2 * deltaWidthMobile,
+                                                    dashPattern: [10 * deltaWidthMobile , 2 * deltaWidthMobile],
+                                                    child:  SizedBox(
+                                                        width: 135 * deltaWidthMobile,
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 60 * deltaWidthMobile,
+                                                              height: 60 * deltaWidthMobile,
+                                                              child: Image.asset('assets/images/company2.png', filterQuality: FilterQuality.high),
+                                                            ),
+                                                            SizedBox(height: 15 * deltaWidthMobile,),
+                                                            Seo.text(text: 'Terra Tort', child: Text(
+                                                                'Terra Tort', textAlign: TextAlign.center,
+                                                                style: TextStyle(
+                                                                    fontFamily: 'TextFont',
+                                                                    fontSize: 18.0*deltaWidthMobile,
+                                                                    fontWeight: FontWeight.w700,
+                                                                    color: Colors.black
+                                                                )
+                                                            ),)
+                                                          ],
+                                                        )
+                                                    )
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        /// TITAN SECURITY
+                                        SizedBox(width: 10 * deltaWidthMobile,),
+                                        MouseRegion(
+                                          cursor:SystemMouseCursors.click,
+                                          child: GestureDetector(
+                                            onTap: (){
+                                              Uri uri = Uri.parse("https://titan-security.kg/");
+                                              _launchURL(uri);
+                                            },
+                                            child: SizedBox(
+                                              height: 200 * deltaWidthMobile,
+                                              width: 144 * deltaWidthMobile,
+                                              child: Center(
+                                                  child: DottedBorder(
+                                                      borderType: BorderType.RRect,
+                                                      radius: Radius.circular(15 * deltaWidthMobile),
+                                                      color: const Color(0xFF050A12),
+                                                      strokeWidth: 2 * deltaWidthMobile,
+                                                      dashPattern: [10 * deltaWidthMobile , 2 * deltaWidthMobile],
+                                                      child:  SizedBox(
+                                                          width: 135 * deltaWidthMobile,
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 60 * deltaWidthMobile,
+                                                                height: 60 * deltaWidthMobile,
+                                                                child: Image.asset('assets/images/company3.png', filterQuality: FilterQuality.high),
+                                                              ),
+                                                              SizedBox(height: 15 * deltaWidthMobile,),
+                                                              Seo.text(text: 'Titan Security', child: Text(
+                                                                  'Titan Security', textAlign: TextAlign.center,
+                                                                  style: TextStyle(
+                                                                      fontFamily: 'TextFont',
+                                                                      fontSize: 18.0*deltaWidthMobile,
+                                                                      fontWeight: FontWeight.w700,
+                                                                      color: Colors.black
+                                                                  )
+                                                              ),)
+                                                            ],
+                                                          )
+                                                      )
+                                                  )
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   )
                                 ],

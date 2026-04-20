@@ -1,73 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+    <!-- ═══════════════════════════════════════
+         FLUTTER BASE PATH (CRITICAL FOR GITHUB PAGES)
+    ═══════════════════════════════════════ -->
+    <base href="/teit_corp/">
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+    <!-- ═══════════════════════════════════════
+         BRAND
+    ═══════════════════════════════════════ -->
+    <title>TEIT CORP — Digital Products & IT Solutions</title>
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="title" content="TEIT CORP">
-  <meta name="description" content="Teit corporation - создаем IT продукты которые подчеркнут вас и вашу компанию.">
-  <meta name="author" content="Teit corporation">
+    <meta name="description" content="TEIT CORP — создаём мобильные приложения, веб-сервисы и цифровые продукты нового поколения. Flutter, SaaS, и кастомные IT решения.">
+    <meta name="author" content="TEIT CORP">
+    <meta name="robots" content="index, follow">
 
-  <!-- open graph -->
+    <!-- IMPORTANT: GitHub Pages canonical -->
+    <link rel="canonical" href="https://tashtemirlan.github.io/teit_corp/">
 
-  <meta property="og:title" content="Teit corporation" />
-  <meta property="og:description" content="Teit corporation - создаем IT продукты которые подчеркнут вас и вашу компанию." />
-  <meta property="og:url" content="https://teitcorp.com" />
-  <meta property="og:image" content="https://teitcorp.com/assets/assets/images/teitopengraph.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="400" />
-  <meta property="og:image:height" content="300" />
-  <meta property="og:image:alt" content="Teit corporation" />
+    <!-- ═══════════════════════════════════════
+         OPEN GRAPH (FIXED FOR GITHUB PAGES)
+    ═══════════════════════════════════════ -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TEIT CORP">
+    <meta property="og:locale" content="ru_RU">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Teit corporation - взгляд в будущее">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <meta property="og:title" content="TEIT CORP — IT продукты будущего">
+    <meta property="og:description" content="Flutter разработки, SaaS системы и цифровые продукты для бизнеса нового поколения.">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <meta property="og:url" content="https://tashtemirlan.github.io/teit_corp/">
+    <meta property="og:image" content="https://tashtemirlan.github.io/teit_corp/icons/Icon-512.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
 
-  <title>Teit corporation - взгляд в будущее</title>
-  <link rel="manifest" href="manifest.json">
+    <!-- ═══════════════════════════════════════
+         TWITTER CARD
+    ═══════════════════════════════════════ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TEIT CORP — Digital IT Solutions">
+    <meta name="twitter:description" content="Flutter apps, SaaS platforms and modern digital products.">
+    <meta name="twitter:image" content="https://tashtemirlan.github.io/teit_corp/icons/Icon-512.png">
 
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = null;
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
+    <!-- ═══════════════════════════════════════
+         PWA / ICONS
+    ═══════════════════════════════════════ -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <meta name="theme-color" content="#0B0F1A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TEIT CORP">
+
+    <!-- ═══════════════════════════════════════
+         PERFORMANCE
+    ═══════════════════════════════════════ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ═══════════════════════════════════════
+         PREMIUM LOADING SCREEN
+    ═══════════════════════════════════════ -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+          background: radial-gradient(circle at center, #0B0F1A 0%, #05070D 100%);
+          font-family: 'Montserrat', sans-serif;
+        }
+
+        #loading {
+          position: fixed;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: #05070D;
+          z-index: 9999;
+          transition: opacity .5s ease;
+        }
+
+        #loading.hidden {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .logo {
+          font-size: 28px;
+          font-weight: 800;
+          color: #ffffff;
+          letter-spacing: 2px;
+          margin-bottom: 25px;
+        }
+
+        .logo span {
+          color: #4DAAE8;
+          text-shadow: 0 0 14px rgba(77,170,232,0.5);
+        }
+
+        .spinner {
+          width: 42px;
+          height: 42px;
+          border: 3px solid #1A2233;
+          border-top-color: #4DAAE8;
+          border-radius: 50%;
+          animation: spin .8s linear infinite;
+        }
+
+        .tagline {
+          margin-top: 18px;
+          font-size: 13px;
+          color: #8FA3B8;
+          letter-spacing: 1px;
+        }
+
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+    </style>
+
 </head>
+
 <body>
 
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
+<!-- LOADING SCREEN -->
+<div id="loading">
+    <div class="logo">TEIT <span>CORP</span></div>
+    <div class="spinner"></div>
+    <div class="tagline">Строим будущее</div>
+</div>
+
+<script>
+    window.addEventListener('flutter-first-frame', function () {
+      const el = document.getElementById('loading');
+      if (el) {
+        el.classList.add('hidden');
+        setTimeout(() => el.remove(), 500);
+      }
     });
-  </script>
+</script>
+
+<!-- FLUTTER BOOTSTRAP -->
+<script src="flutter_bootstrap.js" async></script>
+
 </body>
 </html>
