@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:seo/seo.dart';
-import 'package:teitwebsite/website/websitePage.dart';
 
 class LogoStart extends StatefulWidget{
   const LogoStart({super.key});
@@ -18,10 +18,7 @@ class LogoStartState extends State<LogoStart>{
   Future<void> logoMainMethod() async{
     //todo navigate to our page=>
     Timer(const Duration(milliseconds: 1500), (){
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const WebsitePage()),
-      );
+      if (mounted) context.go('/home');
     });
   }
 

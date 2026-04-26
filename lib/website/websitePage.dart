@@ -2,8 +2,107 @@ import 'dart:async';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:seo/seo.dart';
+
+// ─────────────────────────── LOCALISATION ────────────────────────────────────
+class _WL {
+  static const Map<String, Map<String, String>> _d = {
+    'en': {
+      'contact_btn': 'Contact Us',
+      'dialog_title': 'Our Contacts',
+      'hero_line1': 'Development',
+      'hero_line2': 'OF APPS',
+      'hero_line3': 'AND WEBSITES',
+      'hero_sub': 'We build apps and websites that highlight you and your company.',
+      'steps_title': 'Development Stages',
+      'step1': 'Team\nMeeting',
+      'step2': 'App\nDesign',
+      'step3': 'Writing\nCode',
+      'step4': 'App\nLaunch',
+      'intro1_title': 'Don\'t know where\nto start?',
+      'intro1_body': 'We will develop your app/website from scratch. An intuitive interface with modern design. Our servers are reliably protected, and our solutions are beautiful.',
+      'intro2_title': 'Feedback\n24/7',
+      'intro2_body': 'We strive for excellent customer service and value your opinion. We are always ready to listen to your comments.',
+      'intro3_title': 'Tasks &\nSolutions',
+      'intro3_body': 'We are ready to solve your tasks, regardless of their complexity and scale. Contact us today, and we will help you achieve your goals!',
+      'svc1_title': 'Interface\nDesign',
+      'svc1_desc': 'We create attractive\nand intuitive interfaces',
+      'svc2_title': 'Development &\nProgramming',
+      'svc2_desc': 'Developers solve problems\nof any complexity',
+      'svc3_title': 'Testing &\nDebugging',
+      'svc3_desc': 'We conduct thorough\ntesting of products',
+      'svc4_title': 'Planning &\nAnalysis',
+      'svc4_desc': 'We offer the best solution\nfor your business',
+      'projects_title': 'Our Projects',
+      'footer_more': 'More About Us',
+      'flutter_page': 'Flutter Development',
+    },
+    'ru': {
+      'contact_btn': 'Связаться',
+      'dialog_title': 'Наши контакты',
+      'hero_line1': 'Разработка',
+      'hero_line2': 'ПРИЛОЖЕНИЙ',
+      'hero_line3': 'И ВЕБ САЙТОВ',
+      'hero_sub': 'Создаем сайты которые подчеркнут вас и вашу компанию.',
+      'steps_title': 'Этапы разработки',
+      'step1': 'Командная\nвстреча',
+      'step2': 'Дизайн\nприложения',
+      'step3': 'Написание\nкода',
+      'step4': 'Запуск\nприложения',
+      'intro1_title': 'Не знаете с чего\nначать?',
+      'intro1_body': 'Мы разработаем приложение/веб-сайт с нуля. Интуитивно понятный интерфейс с современным дизайном. Наши сервера надежно защищены, а решения красивы.',
+      'intro2_title': 'Обратная\nсвязь 24/7',
+      'intro2_body': 'Мы стремимся к превосходному обслуживанию наших клиентов и ценим ваше мнение. Мы всегда готовы выслушать ваши комментарии.',
+      'intro3_title': 'Задачи и\nрешения',
+      'intro3_body': 'Мы готовы решать ваши задачи, независимо от их сложности и масштаба. Обратитесь к нам сегодня, и мы поможем вам достичь ваших целей!',
+      'svc1_title': 'Дизайн\nинтерфейса',
+      'svc1_desc': 'Создаем привлекательный\nи понятный интерфейс',
+      'svc2_title': 'Разработка и\nпрограммирование',
+      'svc2_desc': 'Разработчики решат проблему\nлюбой сложности',
+      'svc3_title': 'Тестирование\nи отладка',
+      'svc3_desc': 'Проводим тщательное\nтестирование продуктов',
+      'svc4_title': 'Планирование\nи анализ',
+      'svc4_desc': 'Предложим лучшее решение\nдля вашего бизнеса',
+      'projects_title': 'Наши проекты',
+      'footer_more': 'Больше о нас',
+      'flutter_page': 'Flutter Разработка',
+    },
+    'ky': {
+      'contact_btn': 'Байланышуу',
+      'dialog_title': 'Биздин байланыштар',
+      'hero_line1': 'Иштеп чыгуу',
+      'hero_line2': 'ТИРКЕМЕЛЕРДИН',
+      'hero_line3': 'ЖАНА ВЕБ САЙТТАРДЫН',
+      'hero_sub': 'Сизди жана сиздин компанияны баса белгилеген тиркемелер жана веб-сайттар жасайбыз.',
+      'steps_title': 'Иштеп чыгуу этаптары',
+      'step1': 'Команда\nжыйыны',
+      'step2': 'Тиркеме\nдизайны',
+      'step3': 'Код\nжазуу',
+      'step4': 'Тиркемени\nжарыялоо',
+      'intro1_title': 'Кайдан баштарыңызды\nбилбейсизби?',
+      'intro1_body': 'Биз тиркемени/веб-сайтты нөлдөн иштеп чыгабыз. Заманбап дизайн менен интуитивдик интерфейс. Серверлерибиз ишенимдүү корголгон, чечимдерибиз сонун.',
+      'intro2_title': 'Байланыш\n24/7',
+      'intro2_body': 'Биз кардарларды мыкты тейлөөгө умтулуп, сиздин пикириңизди баалайбыз. Биз сиздин комментарийлериңизди угууга дайыма даярбыз.',
+      'intro3_title': 'Масалелер жана\nчечимдер',
+      'intro3_body': 'Биз сиздин масалалериңизди, алардын татаалдыгына жана масштабына карабастан чечүүгө даярбыз. Бизге бүгүн кайрылыңыз, биз сизге максаттарыңызга жетүүгө жардам берибиз!',
+      'svc1_title': 'Интерфейс\nДизайны',
+      'svc1_desc': 'Жагымдуу жана\nтүшүнүктүү интерфейс',
+      'svc2_title': 'Иштеп чыгуу жана\nпрограммалоо',
+      'svc2_desc': 'Иштеп чыгуучулар каалаган\nтатаалдыктагы маселени чечет',
+      'svc3_title': 'Тестирлөө жана\nоңдоо',
+      'svc3_desc': 'Продукттарды тщательно\nтестирлейбиз',
+      'svc4_title': 'Пландоо жана\nАнализ',
+      'svc4_desc': 'Бизнесиңиз үчүн\nмыкты чечим сунуштайбыз',
+      'projects_title': 'Биздин долбоорлор',
+      'footer_more': 'Биз жөнүндө дагы',
+      'flutter_page': 'Flutter Иштеп чыгуу',
+    },
+  };
+  static String s(String key, String locale) =>
+      _d[locale]?[key] ?? _d['ru']?[key] ?? key;
+}
 
 class WebsitePage extends StatefulWidget{
   const WebsitePage({super.key});
@@ -14,6 +113,36 @@ class WebsitePage extends StatefulWidget{
 }
 
 class WebsitePageState extends State<WebsitePage>{
+
+  String _locale = 'en';
+  String _t(String key) => _WL.s(key, _locale);
+
+  Widget _langSwitcher(double dw) {
+    const blue = Color.fromRGBO(21, 126, 254, 1);
+    return Row(
+      children: [
+        for (final lang in ['en', 'ru', 'ky'])
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () => setState(() => _locale = lang),
+              child: Container(
+                margin: EdgeInsets.only(right: dw * 8),
+                padding: EdgeInsets.symmetric(horizontal: dw * 14, vertical: dw * 7),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(dw * 8),
+                  color: _locale == lang ? blue : Colors.transparent,
+                  border: Border.all(color: _locale == lang ? blue : const Color.fromRGBO(200, 200, 200, 1)),
+                ),
+                child: Text(lang.toUpperCase(),
+                  style: TextStyle(fontFamily: 'TextFont', fontSize: dw * 13, fontWeight: FontWeight.w600,
+                    color: _locale == lang ? Colors.white : const Color.fromRGBO(100, 100, 100, 1))),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
 
   void _launchMailClient() async {
     String kEmail = "teitcorporation@gmail.com";
@@ -40,7 +169,7 @@ class WebsitePageState extends State<WebsitePage>{
             borderRadius: BorderRadius.circular(25.0),
           ),
           title: Text(
-              "Наши контакты" , textAlign: TextAlign.center,
+              _t('dialog_title') , textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'TextFont',
                   fontSize: 28.0*delta,
@@ -436,6 +565,8 @@ class WebsitePageState extends State<WebsitePage>{
                                   ],
                                 ),
                               ),
+                              _langSwitcher(deltaWidth),
+                              SizedBox(width: 8 * deltaWidth),
                               SizedBox(
                                 height: 55*deltaWidth,
                                 child: Padding(
@@ -450,8 +581,8 @@ class WebsitePageState extends State<WebsitePage>{
                                           borderRadius: BorderRadius.circular(8.0 * deltaWidth), // Border radius here
                                         ),
                                       ),
-                                      child: Seo.text(text: 'Связаться', child: Text(
-                                          'Связаться',
+                                      child: Seo.text(text: _t('contact_btn'), child: Text(
+                                          _t('contact_btn'),
                                           style: TextStyle(
                                               fontFamily: 'TextFont',
                                               fontSize: 24.0*deltaWidth,
@@ -491,11 +622,11 @@ class WebsitePageState extends State<WebsitePage>{
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Seo.text(text: "Разработка приложений и веб сайтов", style : TextTagStyle.h2, child: Container()),
+                                              Seo.text(text: "Development of apps and websites", style : TextTagStyle.h2, child: Container()),
                                               SizedBox(
                                                 height: 77 * deltaWidth,
-                                                child: Seo.text(text: 'Разработка', child: Text(
-                                                    'Разработка', textAlign: TextAlign.start,
+                                                child: Seo.text(text: _t('hero_line1'), child: Text(
+                                                    _t('hero_line1'), textAlign: TextAlign.start,
                                                     style: TextStyle(
                                                         fontFamily: 'TextFont',
                                                         fontSize: 60.0*deltaWidth,
@@ -506,8 +637,8 @@ class WebsitePageState extends State<WebsitePage>{
                                               ),
                                               SizedBox(
                                                 height: 102 * deltaWidth ,
-                                                child: Seo.text(text: 'ПРИЛОЖЕНИЙ', child: Text(
-                                                    'ПРИЛОЖЕНИЙ', textAlign: TextAlign.start,
+                                                child: Seo.text(text: _t('hero_line2'), child: Text(
+                                                    _t('hero_line2'), textAlign: TextAlign.start,
                                                     style: TextStyle(
                                                         fontFamily: 'TextFont',
                                                         fontSize: 80.0*deltaWidth,
@@ -518,8 +649,8 @@ class WebsitePageState extends State<WebsitePage>{
                                               ),
                                               SizedBox(
                                                 height: 102 * deltaWidth,
-                                                child: Seo.text(text: 'И ВЕБ САЙТОВ', child: Text(
-                                                    'И ВЕБ САЙТОВ', textAlign: TextAlign.start,
+                                                child: Seo.text(text: _t('hero_line3'), child: Text(
+                                                    _t('hero_line3'), textAlign: TextAlign.start,
                                                     style: TextStyle(
                                                         fontFamily: 'TextFont',
                                                         fontSize: 80.0*deltaWidth,
@@ -530,8 +661,8 @@ class WebsitePageState extends State<WebsitePage>{
                                               ),
                                               SizedBox(
                                                 height: 30 * deltaWidth,
-                                                child: Seo.text(text: 'Создаем сайты которые подчеркнут вас и вашу компанию.', child: Text(
-                                                    'Создаем сайты которые подчеркнут вас и вашу компанию.', textAlign: TextAlign.start,
+                                                child: Seo.text(text: _t('hero_sub'), child: Text(
+                                                    _t('hero_sub'), textAlign: TextAlign.start,
                                                     style: TextStyle(
                                                         fontFamily: 'TextFont',
                                                         fontSize: 20.0*deltaWidth,
@@ -554,8 +685,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                         borderRadius: BorderRadius.circular(8.0 * deltaWidth), // Border radius here
                                                       ),
                                                     ),
-                                                    child: Seo.text(text: 'Связаться', child: Text(
-                                                        'Связаться',
+                                                    child: Seo.text(text: _t('contact_btn'), child: Text(
+                                                        _t('contact_btn'),
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 28.0*deltaWidth,
@@ -598,8 +729,8 @@ class WebsitePageState extends State<WebsitePage>{
                               children: [
                                 SizedBox(
                                   height: 77 * deltaWidth,
-                                  child: Seo.text(text: 'Этапы разработки', child: Text(
-                                      'Этапы разработки', textAlign: TextAlign.center,
+                                  child: Seo.text(text: _t('steps_title'), child: Text(
+                                      _t('steps_title'), textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontFamily: 'TextFont',
                                           fontSize: 60.0*deltaWidth,
@@ -635,8 +766,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                     ),
                                                   ),
                                                   SizedBox(height: 30 * deltaWidth,),
-                                                  Seo.text(text: 'Командная \nвстреча', child: Text(
-                                                      'Командная \nвстреча', textAlign: TextAlign.center,
+                                                  Seo.text(text: _t('step1'), child: Text(
+                                                      _t('step1'), textAlign: TextAlign.center,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
                                                           fontSize: 25.0*deltaWidth,
@@ -669,8 +800,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                     ),
                                                   ),
                                                   SizedBox(height: 30 * deltaWidth,),
-                                                  Seo.text(text: 'Дизайн \nприложения', child: Text(
-                                                      'Дизайн \nприложения', textAlign: TextAlign.center,
+                                                  Seo.text(text: _t('step2'), child: Text(
+                                                      _t('step2'), textAlign: TextAlign.center,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
                                                           fontSize: 25.0*deltaWidth,
@@ -703,8 +834,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                     ),
                                                   ),
                                                   SizedBox(height: 30 * deltaWidth,),
-                                                  Seo.text(text: 'Написание \nкода', child:  Text(
-                                                      'Написание \nкода', textAlign: TextAlign.center,
+                                                  Seo.text(text: _t('step3'), child:  Text(
+                                                      _t('step3'), textAlign: TextAlign.center,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
                                                           fontSize: 25.0*deltaWidth,
@@ -737,8 +868,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                     ),
                                                   ),
                                                   SizedBox(height: 30 * deltaWidth,),
-                                                  Seo.text(text: 'Запуск \nприложения', child: Text(
-                                                      'Запуск \nприложения', textAlign: TextAlign.center,
+                                                  Seo.text(text: _t('step4'), child: Text(
+                                                      _t('step4'), textAlign: TextAlign.center,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
                                                           fontSize: 25.0*deltaWidth,
@@ -790,8 +921,8 @@ class WebsitePageState extends State<WebsitePage>{
                                           children: [
                                             SizedBox(
                                               height: 132 * deltaWidth,
-                                              child: Seo.text(text: 'Не знаете с чего начать?', child: Text(
-                                                  'Не знаете с чего начать?', textAlign: TextAlign.end,
+                                              child: Seo.text(text: _t('intro1_title'), child: Text(
+                                                  _t('intro1_title'), textAlign: TextAlign.end,
                                                   maxLines: 2,
                                                   style: TextStyle(
                                                       fontFamily: 'TextFont',
@@ -805,8 +936,8 @@ class WebsitePageState extends State<WebsitePage>{
                                             SizedBox(height: 15*deltaWidth,),
                                             SizedBox(
                                               height: 120 * deltaWidth,
-                                              child: Seo.text(text: 'Мы разработаем приложение/веб-сайт с нуля. Интуитивно понятный интерфейс с современным дизайном. Наши сервера надежно защищены, а решения красивы', child: Text(
-                                                  'Мы разработаем приложение/веб-сайт с нуля. Интуитивно понятный интерфейс с современным дизайном. Наши сервера надежно защищены, а решения красивы',
+                                              child: Seo.text(text: _t('intro1_body'), child: Text(
+                                                  _t('intro1_body'),
                                                   textAlign: TextAlign.end,
                                                   style: TextStyle(
                                                       fontFamily: 'TextFont',
@@ -848,8 +979,8 @@ class WebsitePageState extends State<WebsitePage>{
                                           children: [
                                             SizedBox(
                                               height: 132 * deltaWidth,
-                                              child: Seo.text(text: 'Обратная связь 24/7', child: Text(
-                                                  'Обратная связь 24/7', textAlign: TextAlign.start,
+                                              child: Seo.text(text: _t('intro2_title'), child: Text(
+                                                  _t('intro2_title'), textAlign: TextAlign.start,
                                                   maxLines: 2,
                                                   style: TextStyle(
                                                       fontFamily: 'TextFont',
@@ -863,8 +994,8 @@ class WebsitePageState extends State<WebsitePage>{
                                             SizedBox(height: 15*deltaWidth,),
                                             SizedBox(
                                               height: 120 * deltaWidth,
-                                              child: Seo.text(text: 'Мы стремимся к превосходному обслуживанию наших клиентов и ценим ваше мнение. Мы всегда готовы выслушать ваши комментарии.', child: Text(
-                                                  'Мы стремимся к превосходному обслуживанию наших клиентов и ценим ваше мнение. Мы всегда готовы выслушать ваши комментарии.',
+                                              child: Seo.text(text: _t('intro2_body'), child: Text(
+                                                  _t('intro2_body'),
                                                   textAlign: TextAlign.start,
                                                   style: TextStyle(
                                                       fontFamily: 'TextFont',
@@ -927,8 +1058,8 @@ class WebsitePageState extends State<WebsitePage>{
                                           children: [
                                             SizedBox(
                                               height: 132 * deltaWidth,
-                                              child: Seo.text(text: 'Задачи и решения', child: Text(
-                                                  'Задачи и решения', textAlign: TextAlign.end,
+                                              child: Seo.text(text: _t('intro3_title'), child: Text(
+                                                  _t('intro3_title'), textAlign: TextAlign.end,
                                                   maxLines: 2,
                                                   style: TextStyle(
                                                       fontFamily: 'TextFont',
@@ -942,8 +1073,8 @@ class WebsitePageState extends State<WebsitePage>{
                                             SizedBox(height: 15*deltaWidth,),
                                             SizedBox(
                                               height: 120 * deltaWidth,
-                                              child: Seo.text(text: 'Мы готовы решать ваши задачи, независимо от их сложности и масштаба. Обратитесь к нам сегодня, и мы поможем вам достичь ваших целей!', child: Text(
-                                                  'Мы готовы решать ваши задачи, независимо от их сложности и масштаба. Обратитесь к нам сегодня, и мы поможем вам достичь ваших целей!',
+                                              child: Seo.text(text: _t('intro3_body'), child: Text(
+                                                  _t('intro3_body'),
                                                   textAlign: TextAlign.end,
                                                   style: TextStyle(
                                                       fontFamily: 'TextFont',
@@ -1013,8 +1144,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                         height: 60 * deltaWidth,
                                                         child: Align(
                                                           alignment: Alignment.centerLeft,
-                                                          child: Seo.text(text: 'Дизайн \nинтерфейса', child: Text(
-                                                              'Дизайн \nинтерфейса', textAlign: TextAlign.start,
+                                                          child: Seo.text(text: _t('svc1_title'), child: Text(
+                                                              _t('svc1_title'), textAlign: TextAlign.start,
                                                               maxLines: 2,
                                                               style: TextStyle(
                                                                   fontFamily: 'TextFont',
@@ -1030,8 +1161,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                       height: 36 * deltaWidth,
                                                       child: Align(
                                                         alignment: Alignment.centerLeft,
-                                                        child: Seo.text(text: 'Создаем привлекательный\nи понятный интерфейс', child: Text(
-                                                            'Создаем привлекательный\nи понятный интерфейс',
+                                                        child: Seo.text(text: _t('svc1_desc'), child: Text(
+                                                            _t('svc1_desc'),
                                                             textAlign: TextAlign.start,
                                                             style: TextStyle(
                                                                 fontFamily: 'TextFont',
@@ -1085,8 +1216,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                           height: 60 * deltaWidth,
                                                           child: Align(
                                                             alignment: Alignment.centerLeft,
-                                                            child: Seo.text(text: 'Разработка и\nпрограммирование', child: Text(
-                                                                'Разработка и\nпрограммирование', textAlign: TextAlign.start,
+                                                            child: Seo.text(text: _t('svc2_title'), child: Text(
+                                                                _t('svc2_title'), textAlign: TextAlign.start,
                                                                 maxLines: 2,
                                                                 style: TextStyle(
                                                                     fontFamily: 'TextFont',
@@ -1102,8 +1233,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                         height: 36 * deltaWidth,
                                                         child: Align(
                                                           alignment: Alignment.centerLeft,
-                                                          child: Seo.text(text: 'Разработчики решат проблему\nлюбой сложности', child: Text(
-                                                              'Разработчики решат проблему\nлюбой сложности',
+                                                          child: Seo.text(text: _t('svc2_desc'), child: Text(
+                                                              _t('svc2_desc'),
                                                               textAlign: TextAlign.start,
                                                               style: TextStyle(
                                                                   fontFamily: 'TextFont',
@@ -1162,8 +1293,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                           height: 60 * deltaWidth,
                                                           child: Align(
                                                             alignment: Alignment.centerLeft,
-                                                            child: Seo.text(text: 'Тестирование \nи отладка', child: Text(
-                                                                'Тестирование \nи отладка', textAlign: TextAlign.start,
+                                                            child: Seo.text(text: _t('svc3_title'), child: Text(
+                                                                _t('svc3_title'), textAlign: TextAlign.start,
                                                                 maxLines: 2,
                                                                 style: TextStyle(
                                                                     fontFamily: 'TextFont',
@@ -1179,8 +1310,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                         height: 36 * deltaWidth,
                                                         child: Align(
                                                           alignment: Alignment.centerLeft,
-                                                          child: Seo.text(text: 'Проводим тщательное\nтестирование продуктов', child: Text(
-                                                              'Проводим тщательное\nтестирование продуктов',
+                                                          child: Seo.text(text: _t('svc3_desc'), child: Text(
+                                                              _t('svc3_desc'),
                                                               textAlign: TextAlign.start,
                                                               style: TextStyle(
                                                                   fontFamily: 'TextFont',
@@ -1234,8 +1365,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                           height: 60 * deltaWidth,
                                                           child: Align(
                                                             alignment: Alignment.centerLeft,
-                                                            child: Seo.text(text: 'Планирование \nи анализ', child: Text(
-                                                                'Планирование \nи анализ', textAlign: TextAlign.start,
+                                                            child: Seo.text(text: _t('svc4_title'), child: Text(
+                                                                _t('svc4_title'), textAlign: TextAlign.start,
                                                                 maxLines: 2,
                                                                 style: TextStyle(
                                                                     fontFamily: 'TextFont',
@@ -1251,8 +1382,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                         height: 36 * deltaWidth,
                                                         child: Align(
                                                           alignment: Alignment.centerLeft,
-                                                          child: Seo.text(text: 'Предложим лучшее решение\nдля вашего бизнеса', child: Text(
-                                                              'Предложим лучшее решение\nдля вашего бизнеса',
+                                                          child: Seo.text(text: _t('svc4_desc'), child: Text(
+                                                              _t('svc4_desc'),
                                                               textAlign: TextAlign.start,
                                                               style: TextStyle(
                                                                   fontFamily: 'TextFont',
@@ -1292,8 +1423,8 @@ class WebsitePageState extends State<WebsitePage>{
                               children: [
                                 SizedBox(
                                   height: 66 * deltaWidth,
-                                  child: Seo.text(text: 'Наши проекты', child: Text(
-                                      'Наши проекты', textAlign: TextAlign.center,
+                                  child: Seo.text(text: _t('projects_title'), child: Text(
+                                      _t('projects_title'), textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontFamily: 'TextFont',
                                           fontSize: 70.0*deltaWidth,
@@ -1554,10 +1685,11 @@ class WebsitePageState extends State<WebsitePage>{
                                       Padding(
                                         padding: EdgeInsets.only(right: 30 * deltaWidth),
                                         child: SizedBox(
-                                          height: 100 * deltaWidth,
+                                          height: 120 * deltaWidth,
                                           child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Seo.text(text: "Больше о нас", child: Text("Больше о нас" , textAlign: TextAlign.center,
+                                              Seo.text(text: _t('footer_more'), child: Text(_t('footer_more') , textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontFamily: 'CompanyFont',
                                                       fontSize: 40.0*deltaWidth,
@@ -1616,7 +1748,29 @@ class WebsitePageState extends State<WebsitePage>{
                                                     ),
                                                   )
                                                 ],
-                                              )
+                                              ),
+                                              SizedBox(height: 10 * deltaWidth,),
+                                              MouseRegion(
+                                                cursor: SystemMouseCursors.click,
+                                                child: GestureDetector(
+                                                  onTap: () => context.go('/flutter'),
+                                                  child: Row(
+                                                    children: [
+                                                      FlutterLogo(size: 18 * deltaWidth),
+                                                      SizedBox(width: 8 * deltaWidth),
+                                                      Seo.text(text: _t('flutter_page'), child: Text(
+                                                          _t('flutter_page'),
+                                                          style: TextStyle(
+                                                              fontFamily: 'TextFont',
+                                                              fontSize: 14.0*deltaWidth,
+                                                              fontWeight: FontWeight.w600,
+                                                              color: const Color.fromRGBO(21, 126, 254, 1)
+                                                          )
+                                                      ),)
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -1723,8 +1877,8 @@ class WebsitePageState extends State<WebsitePage>{
                                             borderRadius: BorderRadius.circular(10.0 * deltaWidthMobile), // Border radius here
                                           ),
                                         ),
-                                        child: Seo.text(text: 'Связаться', child: Text(
-                                            'Связаться',
+                                        child: Seo.text(text: _t('contact_btn'), child: Text(
+                                            _t('contact_btn'),
                                             style: TextStyle(
                                                 fontFamily: 'TextFont',
                                                 fontSize: 16.0*deltaWidthMobile,
@@ -1738,6 +1892,12 @@ class WebsitePageState extends State<WebsitePage>{
                               ],
                             ),
                           ),
+                        ),
+                        SizedBox(height: 8 * deltaWidthMobile),
+                        // Language switcher (mobile)
+                        Align(
+                          alignment: Alignment.center,
+                          child: _langSwitcher(deltaWidthMobile),
                         ),
                         SizedBox(height: 10 * deltaWidthMobile),
                         //development =>
@@ -1764,11 +1924,11 @@ class WebsitePageState extends State<WebsitePage>{
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Seo.text(text: "Разработка приложений и веб сайтов", style : TextTagStyle.h2, child: Container()),
+                                                Seo.text(text: "Development of apps and websites", style : TextTagStyle.h2, child: Container()),
                                                 SizedBox(
                                                     height: 21 * deltaWidthMobile,
-                                                    child: Seo.text(text: 'Разработка', child: Text(
-                                                        'Разработка', textAlign: TextAlign.start,
+                                                    child: Seo.text(text: _t('hero_line1'), child: Text(
+                                                        _t('hero_line1'), textAlign: TextAlign.start,
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 16.0*deltaWidthMobile,
@@ -1779,8 +1939,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                 ),
                                                 SizedBox(
                                                     height: 24 * deltaWidthMobile ,
-                                                    child: Seo.text(text: 'ПРИЛОЖЕНИЙ', child: Text(
-                                                        'ПРИЛОЖЕНИЙ', textAlign: TextAlign.start,
+                                                    child: Seo.text(text: _t('hero_line2'), child: Text(
+                                                        _t('hero_line2'), textAlign: TextAlign.start,
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 16.0*deltaWidthMobile,
@@ -1791,8 +1951,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                 ),
                                                 SizedBox(
                                                     height: 24 * deltaWidthMobile,
-                                                    child: Seo.text(text: 'И ВЕБ САЙТОВ', child: Text(
-                                                        'И ВЕБ САЙТОВ', textAlign: TextAlign.start,
+                                                    child: Seo.text(text: _t('hero_line3'), child: Text(
+                                                        _t('hero_line3'), textAlign: TextAlign.start,
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 16.0*deltaWidthMobile,
@@ -1803,8 +1963,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                 ),
                                                 SizedBox(
                                                     height: 50 * deltaWidthMobile,
-                                                    child: Seo.text(text: 'Создаем сайты которые подчеркнут вас и вашу компанию.', child: Text(
-                                                        'Создаем сайты которые подчеркнут вас и вашу компанию.', textAlign: TextAlign.start,
+                                                    child: Seo.text(text: _t('hero_sub'), child: Text(
+                                                        _t('hero_sub'), textAlign: TextAlign.start,
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 12.0*deltaWidthMobile,
@@ -1827,8 +1987,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                             borderRadius: BorderRadius.circular(8.0 * deltaWidthMobile), // Border radius here
                                                           ),
                                                         ),
-                                                        child: Seo.text(text: 'Связаться', child: Text(
-                                                            'Связаться',
+                                                        child: Seo.text(text: _t('contact_btn'), child: Text(
+                                                            _t('contact_btn'),
                                                             style: TextStyle(
                                                                 fontFamily: 'TextFont',
                                                                 fontSize: 16.0*deltaWidthMobile,
@@ -1871,8 +2031,8 @@ class WebsitePageState extends State<WebsitePage>{
                                 children: [
                                   SizedBox(
                                       height: 30 * deltaWidthMobile,
-                                      child: Seo.text(text: 'Этапы разработки', child: Text(
-                                          'Этапы разработки', textAlign: TextAlign.center,
+                                      child: Seo.text(text: _t('steps_title'), child: Text(
+                                          _t('steps_title'), textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontFamily: 'TextFont',
                                               fontSize: 24.0*deltaWidthMobile,
@@ -1908,8 +2068,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                       ),
                                                     ),
                                                     SizedBox(height: 10 * deltaWidthMobile,),
-                                                    Seo.text(text: 'Командная\nвстреча', child: Text(
-                                                        'Командная\nвстреча', textAlign: TextAlign.center,
+                                                    Seo.text(text: _t('step1'), child: Text(
+                                                        _t('step1'), textAlign: TextAlign.center,
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 12.0*deltaWidthMobile,
@@ -1942,8 +2102,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                       ),
                                                     ),
                                                     SizedBox(height: 10 * deltaWidthMobile,),
-                                                    Seo.text(text: 'Дизайн\nприложения', child: Text(
-                                                        'Дизайн\nприложения', textAlign: TextAlign.center,
+                                                    Seo.text(text: _t('step2'), child: Text(
+                                                        _t('step2'), textAlign: TextAlign.center,
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 12.0*deltaWidthMobile,
@@ -1976,8 +2136,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                       ),
                                                     ),
                                                     SizedBox(height: 10 * deltaWidthMobile,),
-                                                    Seo.text(text: 'Написание \nкода', child:  Text(
-                                                        'Написание\nкода', textAlign: TextAlign.center,
+                                                    Seo.text(text: _t('step3'), child:  Text(
+                                                        _t('step3'), textAlign: TextAlign.center,
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 12.0*deltaWidthMobile,
@@ -2010,8 +2170,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                       ),
                                                     ),
                                                     SizedBox(height: 10 * deltaWidthMobile,),
-                                                    Seo.text(text: 'Запуск\nприложения', child: Text(
-                                                        'Запуск\nприложения', textAlign: TextAlign.center,
+                                                    Seo.text(text: _t('step4'), child: Text(
+                                                        _t('step4'), textAlign: TextAlign.center,
                                                         style: TextStyle(
                                                             fontFamily: 'TextFont',
                                                             fontSize: 12.0*deltaWidthMobile,
@@ -2063,8 +2223,8 @@ class WebsitePageState extends State<WebsitePage>{
                                             children: [
                                               SizedBox(
                                                   height: 35 * deltaWidthMobile,
-                                                  child: Seo.text(text: 'Не знаете с чего начать?', child: Text(
-                                                      'Не знаете с чего начать?', textAlign: TextAlign.end,
+                                                  child: Seo.text(text: _t('intro1_title'), child: Text(
+                                                      _t('intro1_title'), textAlign: TextAlign.end,
                                                       maxLines: 2,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
@@ -2078,8 +2238,8 @@ class WebsitePageState extends State<WebsitePage>{
                                               SizedBox(height: 5*deltaWidthMobile,),
                                               SizedBox(
                                                   height: 180 * deltaWidthMobile,
-                                                  child: Seo.text(text: 'Мы разработаем приложение/веб-сайт с нуля. Интуитивно понятный интерфейс с современным дизайном. Наши сервера надежно защищены, а решения красивы', child: Text(
-                                                      'Мы разработаем приложение/веб-сайт с нуля. Интуитивно понятный интерфейс с современным дизайном. Наши сервера надежно защищены, а решения красивы',
+                                                  child: Seo.text(text: _t('intro1_body'), child: Text(
+                                                      _t('intro1_body'),
                                                       textAlign: TextAlign.end,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
@@ -2121,8 +2281,8 @@ class WebsitePageState extends State<WebsitePage>{
                                             children: [
                                               SizedBox(
                                                   height: 35 * deltaWidthMobile,
-                                                  child: Seo.text(text: 'Обратная связь 24/7', child: Text(
-                                                      'Обратная связь 24/7', textAlign: TextAlign.start,
+                                                  child: Seo.text(text: _t('intro2_title'), child: Text(
+                                                      _t('intro2_title'), textAlign: TextAlign.start,
                                                       maxLines: 2,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
@@ -2136,8 +2296,8 @@ class WebsitePageState extends State<WebsitePage>{
                                               SizedBox(height: 5*deltaWidthMobile,),
                                               SizedBox(
                                                   height: 180 * deltaWidthMobile,
-                                                  child: Seo.text(text: 'Мы стремимся к превосходному обслуживанию наших клиентов и ценим ваше мнение. Мы всегда готовы выслушать ваши комментарии.', child: Text(
-                                                      'Мы стремимся к превосходному обслуживанию наших клиентов и ценим ваше мнение. Мы всегда готовы выслушать ваши комментарии.',
+                                                  child: Seo.text(text: _t('intro2_body'), child: Text(
+                                                      _t('intro2_body'),
                                                       textAlign: TextAlign.start,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
@@ -2200,8 +2360,8 @@ class WebsitePageState extends State<WebsitePage>{
                                             children: [
                                               SizedBox(
                                                   height: 35 * deltaWidthMobile,
-                                                  child: Seo.text(text: 'Задачи и решения', child: Text(
-                                                      'Задачи и решения', textAlign: TextAlign.end,
+                                                  child: Seo.text(text: _t('intro3_title'), child: Text(
+                                                      _t('intro3_title'), textAlign: TextAlign.end,
                                                       maxLines: 2,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
@@ -2215,8 +2375,8 @@ class WebsitePageState extends State<WebsitePage>{
                                               SizedBox(height: 5*deltaWidthMobile,),
                                               SizedBox(
                                                   height: 180 * deltaWidthMobile,
-                                                  child: Seo.text(text: 'Мы готовы решать ваши задачи, независимо от их сложности и масштаба. Обратитесь к нам сегодня, и мы поможем вам достичь ваших целей!', child: Text(
-                                                      'Мы готовы решать ваши задачи, независимо от их сложности и масштаба. Обратитесь к нам сегодня, и мы поможем вам достичь ваших целей!',
+                                                  child: Seo.text(text: _t('intro3_body'), child: Text(
+                                                      _t('intro3_body'),
                                                       textAlign: TextAlign.end,
                                                       style: TextStyle(
                                                           fontFamily: 'TextFont',
@@ -2287,8 +2447,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                           height: 30 * deltaWidthMobile,
                                                           child: Align(
                                                               alignment: Alignment.centerLeft,
-                                                              child: Seo.text(text: 'Дизайн \nинтерфейса', child: Text(
-                                                                  'Дизайн \nинтерфейса', textAlign: TextAlign.start,
+                                                              child: Seo.text(text: _t('svc1_title'), child: Text(
+                                                                  _t('svc1_title'), textAlign: TextAlign.start,
                                                                   maxLines: 2,
                                                                   style: TextStyle(
                                                                       fontFamily: 'TextFont',
@@ -2304,8 +2464,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                         height: 65 * deltaWidthMobile,
                                                         child: Align(
                                                             alignment: Alignment.centerLeft,
-                                                            child: Seo.text(text: 'Создаем привлекательный\nи понятный интерфейс', child: Text(
-                                                                'Создаем привлека-\nтельный и понятный интерфейс',
+                                                            child: Seo.text(text: _t('svc1_desc'), child: Text(
+                                                                _t('svc1_desc'),
                                                                 textAlign: TextAlign.start,
                                                                 style: TextStyle(
                                                                     fontFamily: 'TextFont',
@@ -2360,8 +2520,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                             height: 30 * deltaWidthMobile,
                                                             child: Align(
                                                                 alignment: Alignment.centerLeft,
-                                                                child: Seo.text(text: 'Разработка и\nпрограммирование', child: Text(
-                                                                    'Разработка и программирование', textAlign: TextAlign.start,
+                                                                child: Seo.text(text: _t('svc2_title'), child: Text(
+                                                                    _t('svc2_title'), textAlign: TextAlign.start,
                                                                     maxLines: 2,
                                                                     style: TextStyle(
                                                                         fontFamily: 'TextFont',
@@ -2377,8 +2537,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                           height: 60 * deltaWidthMobile,
                                                           child: Align(
                                                               alignment: Alignment.centerLeft,
-                                                              child: Seo.text(text: 'Разработчики решат проблему\nлюбой сложности', child: Text(
-                                                                  'Разработчики решат проблему\nлюбой сложности',
+                                                              child: Seo.text(text: _t('svc2_desc'), child: Text(
+                                                                  _t('svc2_desc'),
                                                                   textAlign: TextAlign.start,
                                                                   style: TextStyle(
                                                                       fontFamily: 'TextFont',
@@ -2438,8 +2598,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                             height: 30 * deltaWidthMobile,
                                                             child: Align(
                                                                 alignment: Alignment.centerLeft,
-                                                                child: Seo.text(text: 'Тестирование \nи отладка', child: Text(
-                                                                    'Тестирование и отладка', textAlign: TextAlign.start,
+                                                                child: Seo.text(text: _t('svc3_title'), child: Text(
+                                                                    _t('svc3_title'), textAlign: TextAlign.start,
                                                                     maxLines: 2,
                                                                     style: TextStyle(
                                                                         fontFamily: 'TextFont',
@@ -2455,8 +2615,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                           height: 65 * deltaWidthMobile,
                                                           child: Align(
                                                               alignment: Alignment.centerLeft,
-                                                              child: Seo.text(text: 'Проводим тщательное\nтестирование продуктов', child: Text(
-                                                                  'Проводим тщательное\nтестирование продуктов',
+                                                              child: Seo.text(text: _t('svc3_desc'), child: Text(
+                                                                  _t('svc3_desc'),
                                                                   textAlign: TextAlign.start,
                                                                   style: TextStyle(
                                                                       fontFamily: 'TextFont',
@@ -2511,8 +2671,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                             height: 30 * deltaWidthMobile,
                                                             child: Align(
                                                                 alignment: Alignment.centerLeft,
-                                                                child: Seo.text(text: 'Планирование \nи анализ', child: Text(
-                                                                    'Планирование и анализ', textAlign: TextAlign.start,
+                                                                child: Seo.text(text: _t('svc4_title'), child: Text(
+                                                                    _t('svc4_title'), textAlign: TextAlign.start,
                                                                     maxLines: 2,
                                                                     style: TextStyle(
                                                                         fontFamily: 'TextFont',
@@ -2528,8 +2688,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                           height: 50 * deltaWidthMobile,
                                                           child: Align(
                                                               alignment: Alignment.centerLeft,
-                                                              child: Seo.text(text: 'Предложим лучшее решение\nдля вашего бизнеса', child: Text(
-                                                                  'Предложим лучшее решение\nдля вашего бизнеса',
+                                                              child: Seo.text(text: _t('svc4_desc'), child: Text(
+                                                                  _t('svc4_desc'),
                                                                   textAlign: TextAlign.start,
                                                                   style: TextStyle(
                                                                       fontFamily: 'TextFont',
@@ -2570,8 +2730,8 @@ class WebsitePageState extends State<WebsitePage>{
                                 children: [
                                   SizedBox(
                                       height: 24 * deltaWidthMobile,
-                                      child: Seo.text(text: 'Наши проекты', child: Text(
-                                          'Наши проекты', textAlign: TextAlign.center,
+                                      child: Seo.text(text: _t('projects_title'), child: Text(
+                                          _t('projects_title'), textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontFamily: 'TextFont',
                                               fontSize: 16.0*deltaWidthMobile,
@@ -2812,10 +2972,11 @@ class WebsitePageState extends State<WebsitePage>{
                                         Padding(
                                           padding: EdgeInsets.only(right: 15 * deltaWidthMobile, top: 20 * deltaWidthMobile),
                                           child: SizedBox(
-                                            height: 100 * deltaWidthMobile,
+                                            height: 120 * deltaWidthMobile,
                                             child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Seo.text(text: "Больше о нас", child: Text("Больше о нас" , textAlign: TextAlign.center,
+                                                Seo.text(text: _t('footer_more'), child: Text(_t('footer_more') , textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         fontFamily: 'CompanyFont',
                                                         fontSize: 10.0*deltaWidthMobile,
@@ -2849,7 +3010,7 @@ class WebsitePageState extends State<WebsitePage>{
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(width: 20 * deltaWidthMobile,),
+                                                    SizedBox(height: 4 * deltaWidthMobile,),
                                                     MouseRegion(
                                                       cursor: SystemMouseCursors.click,
                                                       child: GestureDetector(
@@ -2872,7 +3033,29 @@ class WebsitePageState extends State<WebsitePage>{
                                                           ],
                                                         ),
                                                       ),
-                                                    )
+                                                    ),
+                                                    SizedBox(height: 4 * deltaWidthMobile,),
+                                                    MouseRegion(
+                                                      cursor: SystemMouseCursors.click,
+                                                      child: GestureDetector(
+                                                        onTap: () => context.go('/flutter'),
+                                                        child: Row(
+                                                          children: [
+                                                            FlutterLogo(size: 12 * deltaWidthMobile),
+                                                            SizedBox(width: 3 * deltaWidthMobile),
+                                                            Seo.text(text: _t('flutter_page'), child: Text(
+                                                                _t('flutter_page'),
+                                                                style: TextStyle(
+                                                                    fontFamily: 'TextFont',
+                                                                    fontSize: 12.0*deltaWidthMobile,
+                                                                    fontWeight: FontWeight.w600,
+                                                                    color: const Color.fromRGBO(21, 126, 254, 1)
+                                                                )
+                                                            ),)
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ],
                                                 )
                                               ],
