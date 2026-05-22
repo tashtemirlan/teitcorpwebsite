@@ -7,7 +7,7 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(MaterialApp.router(
-      title: 'Teit corporation - взгляд в будущее',
+      title: 'TEIT CORP | Fintech, IT Development & Digital Products',
       theme: ThemeData(
         colorScheme: ThemeData().colorScheme.copyWith(
           primary: const Color.fromRGBO(77, 170, 232, 1),
