@@ -1,0 +1,12 @@
+/* TEAM */
+Company: TEIT CORP
+Focus: Fintech, digital products, IT development, mobile apps, web services, SaaS systems, custom software
+Languages: English, Russian, Kyrgyz
+Contact: teitcorporation@gmail.com
+Telegram: https://t.me/teit_dart
+
+/* SITE */
+Stack: Flutter Web
+Routes:
+/#/home
+/#/flutter

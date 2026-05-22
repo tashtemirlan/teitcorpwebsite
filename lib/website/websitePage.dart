@@ -151,7 +151,7 @@ class WebsitePageState extends State<WebsitePage>{
   }
 
   void _launchTelegramClient() async {
-    String telegramData = "https://t.me/teit_flutter";
+    String telegramData = "https://t.me/teit_dart";
     await launchUrl(Uri.parse(telegramData));
   }
 
@@ -226,7 +226,7 @@ class WebsitePageState extends State<WebsitePage>{
                                         )
                                     ),
                                     Text(
-                                        '@teit_flutter',
+                                        '@teit_dart',
                                         style: TextStyle(
                                             fontFamily: 'TextFont',
                                             fontSize: 14.0*delta,
@@ -383,7 +383,7 @@ class WebsitePageState extends State<WebsitePage>{
                                         )
                                     ),
                                     Text(
-                                        '@teit_flutter',
+                                        '@teit_dart',
                                         style: TextStyle(
                                             fontFamily: 'TextFont',
                                             fontSize: 12.0*delta,
@@ -1734,8 +1734,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                         children: [
                                                           FaIcon(FontAwesomeIcons.solidPaperPlane , size: 18 * deltaWidth, color: Colors.white,),
                                                           SizedBox(width: 5 * deltaWidth,),
-                                                          Seo.text(text: '@teit_flutter', child: Text(
-                                                              '@teit_flutter',
+                                                          Seo.text(text: '@teit_dart', child: Text(
+                                                              '@teit_dart',
                                                               style: TextStyle(
                                                                   fontFamily: 'TextFont',
                                                                   fontSize: 14.0*deltaWidth,
@@ -3021,8 +3021,8 @@ class WebsitePageState extends State<WebsitePage>{
                                                           children: [
                                                             FaIcon(FontAwesomeIcons.solidPaperPlane , size: 12 * deltaWidthMobile, color: Colors.white,),
                                                             SizedBox(width: 3 * deltaWidthMobile,),
-                                                            Seo.text(text: '@teit_flutter', child: Text(
-                                                                '@teit_flutter',
+                                                            Seo.text(text: '@teit_dart', child: Text(
+                                                                '@teit_dart',
                                                                 style: TextStyle(
                                                                     fontFamily: 'TextFont',
                                                                     fontSize: 12.0*deltaWidthMobile,

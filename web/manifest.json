@@ -1,11 +1,11 @@
 {
-    "name": "Teit corporation",
-    "short_name": "Teit corporation",
+    "name": "TEIT CORP",
+    "short_name": "TEIT CORP",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff",
-    "description": "Teit corporation - создаем IT продукты которые подчеркнут вас и вашу компанию.",
+    "background_color": "#0B0F1A",
+    "theme_color": "#0B0F1A",
+    "description": "TEIT CORP develops fintech platforms, digital products, mobile applications, web services, SaaS systems, and custom IT solutions.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

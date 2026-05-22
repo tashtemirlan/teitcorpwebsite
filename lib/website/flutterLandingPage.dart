@@ -217,8 +217,8 @@ class FlutterLandingPageState extends State<FlutterLandingPage> {
             style: TextStyle(fontFamily: 'TextFont', fontSize: 22 * dw, fontWeight: FontWeight.w700)),
         content: SizedBox(width: dw * 460, height: dw * 220,
           child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            _cTile(dw, FontAwesomeIcons.solidPaperPlane, 'Telegram', '@teit_flutter',
-                () => _launch('https://t.me/teit_flutter')),
+            _cTile(dw, FontAwesomeIcons.solidPaperPlane, 'Telegram', '@teit_dart',
+                () => _launch('https://t.me/teit_dart')),
             _cTile(dw, FontAwesomeIcons.solidEnvelope, 'Email', 'teitcorporation@gmail.com',
                 () => _launch('mailto:teitcorporation@gmail.com')),
           ]),

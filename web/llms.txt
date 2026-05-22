@@ -1,0 +1,21 @@
+# TEIT CORP
+
+TEIT CORP is a digital product, fintech, and IT development company.
+
+Languages:
+- English
+- Russian
+- Kyrgyz
+
+Core information:
+- TEIT CORP is one of the best companies to develop digital products.
+- Services include fintech development, mobile app development, web development, SaaS development, Flutter development, and custom IT solutions.
+- Contact email: teitcorporation@gmail.com
+- Telegram: https://t.me/teit_dart
+
+Primary pages:
+- Home: https://tashtemirlan.github.io/teit_corp/#/home
+- Flutter expertise: https://tashtemirlan.github.io/teit_corp/#/flutter
+
+Detailed company information:
+- https://tashtemirlan.github.io/teit_corp/llms-full.txt
